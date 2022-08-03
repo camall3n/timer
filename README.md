@@ -1,6 +1,13 @@
 # timer
 A simple timer for profiling python code.
 
+## Installation
+
+```
+pip install git+https://github.com/camall3n/timer.git
+```
+
+## Usage
 The way you use it is as follows:
 
 ```python

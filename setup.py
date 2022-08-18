@@ -8,6 +8,9 @@ setup(
     author_email=('csal@brown.edu'),
     packages=find_packages(include=['timer', 'timer.*']),
     url='https://github.com/camall3n/timer/',
+    install_requires=[
+        "tabulate",
+    ],
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',

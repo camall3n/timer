@@ -50,11 +50,14 @@ class Timer:
             print('-'*len(final_row))
 
     def wrap(tag=None):
-        """Function decorator for timing a function, with an optional tag argument"""
+        """Generates a function decorator for timing a function, with an optional tag argument"""
         def new_decorator(func):
             _tag = func.__qualname__ if tag is None else tag
-            def wrapped_func(*args):
+
+            def wrapped_func(*args, **kwargs):
                 with Timer(_tag):
-                    return func(*args)
+                    return func(*args, **kwargs)
+
             return wrapped_func
+
         return new_decorator

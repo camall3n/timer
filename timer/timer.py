@@ -1,4 +1,5 @@
 from collections import defaultdict
+from functools import wraps
 import time
 
 from tabulate import tabulate
@@ -54,6 +55,7 @@ class Timer:
         def new_decorator(func):
             _tag = func.__qualname__ if tag is None else tag
 
+            @wraps(func)
             def wrapped_func(*args, **kwargs):
                 with Timer(_tag):
                     return func(*args, **kwargs)

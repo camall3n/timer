@@ -63,6 +63,8 @@ class Foo:
         return
 ```
 
+The decorator syntax is equivalent to wrapping all occurrences of a function call using the `with Timer('tag'):` syntax and the same tag for each.
+
 ## Example
 
 The following example is available in the `test/` directory.

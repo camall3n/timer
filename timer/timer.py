@@ -53,7 +53,14 @@ class Timer:
     def wrap(tag=None):
         """Generates a function decorator for timing a function, with an optional tag argument"""
         def new_decorator(func):
-            _tag = func.__qualname__ if tag is None else tag
+            if tag is not None:
+                _tag = tag
+            else:
+                try:
+                    _tag = func.__qualname__
+                except AttributeError:
+                    _tag = func.__name__
+
 
             @wraps(func)
             def wrapped_func(*args, **kwargs):

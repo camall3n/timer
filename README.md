@@ -83,7 +83,7 @@ def a(i):
     with Timer('a'):
         return sum([x for x in range(i)])
 
-@Timer.wrap()
+@Timer.wrap('my_func')
 def b():
     time.sleep(0.01)
 

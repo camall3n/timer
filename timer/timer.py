@@ -79,10 +79,15 @@ class Timer:
         """
         Print timer statistics
 
-        For each specified `tag` identifier, this table displays (left to
-        right) the fraction of the total time that the computation block takes
-        up, its corresponding wallclock time, the time per call (in seconds),
-        the effective rate of calls per second, and the total number of calls.
+        The timer module will attempt to automatically call this function end
+        of program execution, but it can also be called manually.
+
+        :param csv:             print results as comma separated values
+                                instead of table
+        :param float_precision: the number of decimal places for the frac and
+                                rate columns
+
+        Sample output:
 
         ------------------------------------------------------------
         tag        frac       time    percall          rate    calls
@@ -94,17 +99,20 @@ class Timer:
         Total time: 1.573442s
         ------------------------------------------------------------
 
-        The stats are global, so you can import wherever you need a timer
-        (`from timer import Timer`) and then just call `Timer.print_stats()`
-        once at the end of the main scope (or whenever you want to check). The
-        total time since the `timer` module was first imported is displayed at
-        the bottom of the table.
+        This table displays (left to right):
 
-        :param csv:             print results as comma separated values
-                                instead of table
-        :param float_precision: the number of decimal places for the frac and
-                                rate columns
+        - `tag`: the identifier string for the computation block or function
+        - `frac`: the fraction of the total time that the computation block
+                    takes up
+        - `time`: the corresponding wallclock time
+        - `percall`: the average time per call
+        - `rate`: the effective rate of calls per second
+        - `calls`: the total number of calls
 
+        The stats are global, so you can `import timer` wherever you need it
+        and the stats will print for all timers. The total time since the
+        `timer` module was first imported is displayed at the bottom of the
+        table.
         """
         total_time = time.time() - cls._startup_time
         headers = ['tag', 'frac', 'time', 'percall', 'rate', 'calls']

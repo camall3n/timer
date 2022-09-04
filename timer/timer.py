@@ -6,6 +6,7 @@ import time
 
 from tabulate import tabulate
 
+
 def time2str(t, abbr=False):
     """
     Convert an amount of time (in seconds) to a fixed-width string
@@ -23,6 +24,7 @@ def time2str(t, abbr=False):
     s += f'{mins:2d}m' if mins > 0 else ' ' * 3
     s += f'{secs:2d}.{micros:06d}s'
     return s.lstrip() if abbr else s
+
 
 class Timer:
     """
@@ -138,23 +140,36 @@ class Timer:
             calls = cls.counters[field_name]
             time_per_call = cumulative_time / calls
             iters_per_sec = 'NaN' if cumulative_time == 0 else (calls / cumulative_time)
-            row = [field_name, frac, time2str(cumulative_time), time2str(time_per_call), iters_per_sec, calls]
+            row = [
+                field_name,
+                frac,
+                time2str(cumulative_time),
+                time2str(time_per_call),
+                iters_per_sec,
+                calls,
+            ]
             if csv:
                 print(*row, sep=', ')
             else:
                 rows.append(row)
 
         if not csv:
-            table_str = tabulate(rows, headers=headers, floatfmt=f'.{float_precision}f', colalign=(['left'] + ['right'] * 5))
+            table_str = tabulate(rows,
+                                 headers=headers,
+                                 floatfmt=f'.{float_precision}f',
+                                 colalign=(['left'] + ['right'] * 5))
             final_row = table_str.split('\n')[-1]
-            print('-'*len(final_row))
+            print('-' * len(final_row))
             print(table_str)
-            print('-'*len(final_row))
+            print('-' * len(final_row))
             print(f'Total time: {time2str(total_time, abbr=True)}')
-            print('-'*len(final_row))
+            print('-' * len(final_row))
 
     def wrap(tag=None):
-        """Generates a function decorator for timing a function, with an optional tag argument"""
+        """
+        Generates a function decorator for timing a function, with an optional tag argument
+        """
+
         def new_decorator(func):
             if tag is not None:
                 _tag = tag
@@ -164,7 +179,6 @@ class Timer:
                 except AttributeError:
                     _tag = func.__name__
 
-
             @wraps(func)
             def wrapped_func(*args, **kwargs):
                 with Timer(_tag):
@@ -173,5 +187,6 @@ class Timer:
             return wrapped_func
 
         return new_decorator
+
 
 atexit.register(Timer.stats)

@@ -38,7 +38,7 @@ The decorator syntax automatically uses the function's qualified name as a tag (
 
 ## Printing Statistics
 
-The timer module will attempt to automatically print statistics at the end of program execution. To print manually, use `Timer.print_stats()`.
+The timer module will attempt to automatically print statistics at the end of program execution. To print manually, use `Timer.stats()`.
 
 ```text
 ----------------------------------------------------------

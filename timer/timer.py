@@ -55,7 +55,7 @@ class Timer:
     this with your own identifier.
 
     The timer module will attempt to automatically print statistics at the end
-    of program execution. To print manually, use `Timer.print_stats()`.
+    of program execution. To print manually, use `Timer.stats()`.
     """
     timers = defaultdict(float)
     counters = defaultdict(int)
@@ -75,7 +75,8 @@ class Timer:
         self.counters[self.field_name] += 1
 
     @classmethod
-    def print_stats(cls, csv=False, float_precision=6):
+    @classmethod
+    def stats(cls, csv=False, float_precision=6):
         """
         Print timer statistics
 
@@ -161,4 +162,4 @@ class Timer:
 
         return new_decorator
 
-atexit.register(Timer.print_stats)
+atexit.register(Timer.stats)

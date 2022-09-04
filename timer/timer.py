@@ -75,6 +75,14 @@ class Timer:
         self.counters[self.field_name] += 1
 
     @classmethod
+    def reset(cls):
+        """
+        Delete all timers and reset stats
+        """
+        cls.timers = defaultdict(float)
+        cls.counters = defaultdict(int)
+        cls._startup_time = time.time()
+
     @classmethod
     def stats(cls, csv=False, float_precision=6):
         """

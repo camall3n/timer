@@ -61,6 +61,8 @@ This table displays (left to right):
 
 The stats are global, so you can `import timer` wherever you need it and the stats will print for all timers. The total time since the `timer` module was first imported is displayed at the bottom of the table.
 
+To delete all timers and reset all statistics to zero, use `Timer.reset()`.
+
 ## Example
 
 The following example is available in the `test/` directory.

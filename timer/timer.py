@@ -75,6 +75,10 @@ class Timer:
         self.counters[self.field_name] += 1
 
     @classmethod
+    def duration(cls):
+        return time.time() - cls._startup_time
+
+    @classmethod
     def reset(cls):
         """
         Delete all timers and reset stats
@@ -123,7 +127,7 @@ class Timer:
         `timer` module was first imported is displayed at the bottom of the
         table.
         """
-        total_time = time.time() - cls._startup_time
+        total_time = cls.duration()
         headers = ['tag', 'frac', 'time', 'percall', 'rate', 'calls']
         rows = []
         if csv:
